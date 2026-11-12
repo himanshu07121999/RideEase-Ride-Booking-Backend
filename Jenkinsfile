@@ -13,25 +13,35 @@ pipeline {
         stage('Build Ride Service') {
             steps {
                 dir('ride-service') {
-                    bat 'mvnw.cmd clean compile'
+                    bat 'mvnw.cmd clean package'
                 }
             }
         }
 
-        stage('Test Ride Service') {
+        stage('Build Location Service') {
             steps {
-                dir('ride-service') {
-                    bat 'mvnw.cmd test'
+                dir('location-service') {
+                    bat 'mvnw.cmd clean package'
                 }
             }
         }
 
-        stage('Package Ride Service') {
+        stage('Build Matching Service') {
             steps {
-                dir('ride-service') {
-                    bat 'mvnw.cmd package -DskipTests'
+                dir('matching-service') {
+                    bat 'mvnw.cmd clean package'
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'All RideEase microservices built successfully!'
+        }
+
+        failure {
+            echo 'RideEase build failed. Check console output.'
         }
     }
 }
