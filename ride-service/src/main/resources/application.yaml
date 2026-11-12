@@ -11,7 +11,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/uberApp
     username: root
-    password: ******
+    password: "my*password"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # JPA
